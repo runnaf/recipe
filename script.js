@@ -1,4 +1,5 @@
 const search = document.querySelector('#search');
+const apiAdress = 'http://194.87.214.100/';
 
 const simmillerCard = (recipes) => {
   const containerCards = document.querySelector('.recipes__list');
@@ -9,7 +10,7 @@ const simmillerCard = (recipes) => {
     card.innerHTML = `
       <div class="container__card container__card--left">
         <h3 class="recipe__name">${item.title}</h3>
-        <img src="${item.picture}" class="recipe__image" width="200" height="300">
+        <img src="${apiAdress + item.picture}" class="recipe__image" width="200" height="300">
       </div>
       <div class="container__card container__card--rigth">
         <h3 class="recipe__name">${item.title}</h3>
@@ -100,10 +101,8 @@ const getFilter = () =>{
 
 
 const getData = () => {
-  fetch('http://194.87.214.100/recipes', {
-    mode: 'no-cors'
-  })
-  .then(Response=>console.log(Response))
+  fetch('http://194.87.214.100/recipes')
+  .then(res=>res.json())
   .then(data => Object.values(data))
   .then (data => {
     simmillerCard(data);
